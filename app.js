@@ -10,7 +10,7 @@ async function generate(){
   status('영상 앞부분 최대 5분을 분석하고 있어요…'); $('result').textContent='분석 중…';
   try{
     const r=await fetch('/api/comment',{method:'POST',credentials:'same-origin',headers:{'Content-Type':'application/json','X-Comment-App':'1'},body:JSON.stringify({url,style:$('style').selectedIndex}),signal:AbortSignal.timeout(60000)});
-    if(!r.headers.get('content-type')?.includes('application/json'))throw Error(r.status===429?'요청이 많습니다. 1분 뒤 다시 시도해 주세요.':'로그인이 만료됐습니다. 페이지를 새로 열어 주세요.');
+    if(!r.headers.get('content-type')?.includes('application/json'))throw Error(r.status===429?'요청이 많습니다. 1분 뒤 다시 시도해 주세요.':r.status>=500?'서버 응답 시간이 초과됐습니다. 잠시 후 다시 시도해 주세요.':'로그인이 만료됐습니다. 페이지를 새로 열어 주세요.');
     const data=await r.json(); if(!r.ok)throw Error(data.error||'요청에 실패했습니다.');
     if(data.comment.includes('영상 분석 불가')){$('result').textContent='영상 분석 불가';status('영상에 접근하지 못했습니다. 다른 공개 영상을 시도해 주세요.');}
     else{last=data.comment;$('result').textContent=last;$('copy').disabled=false;status('댓글이 생성됐어요. 내용을 확인한 뒤 복사하세요.');}
