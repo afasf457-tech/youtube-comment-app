@@ -1,4 +1,5 @@
 const $=id=>document.getElementById(id);
+if ('serviceWorker' in navigator) window.addEventListener('load',()=>navigator.serviceWorker.register('/sw.js').catch(()=>{}));
 try { localStorage.removeItem('gemini_api_key'); } catch {}
 let last='',lastUrl='',busy=false;
 const status=s=>$('status').textContent=s;
