@@ -1,0 +1,1 @@
+{"name":"유튜브 댓글 생성기","short_name":"댓글 생성기","description":"영상 내용을 분석해 자연스러운 유튜브 댓글을 만드는 개인용 도구","start_url":"/","display":"standalone","background_color":"#101522","theme_color":"#141b2d","lang":"ko","icons":[{"src":"/icon.svg","sizes":"any","type":"image/svg+xml","purpose":"any maskable"}]}
